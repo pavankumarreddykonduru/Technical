@@ -1,0 +1,8 @@
+-
+    name: 'Execute a date command on web'
+    hosts: all
+    tasks:
+        -
+            name: 'Execute a date command'
+            command: date
+
