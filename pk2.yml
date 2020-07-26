@@ -1,0 +1,22 @@
+---
+  - name: Examples of lineinfile
+    hosts: web
+
+    tasks:
+      - name: sudoers for techstack user
+        become: yes
+        copy:
+          src: /home/centos/test1.conf
+          dest: /tmp/
+          mode: 0640
+      - name: "Example1: Validate if a String or line is present in the file"
+        become: yes
+        lineinfile:
+          path: /home/centos/test1.conf
+          regexp: "jdk.tls.disabledAlgorithms=SSLv3, RC4, DES, MD5withRSA, DH keySize < 1024, \ 
+                               EC keySize < 224, 3DES_EDE_CBC, anon, NULL"
+          line: "jdk.tls.disabledAlgorithms=SSLv3, TLSv1, TLSv1.1, RC4, MD5withRSA, DH keySize < 768, 3DES_EDE_CBC"
+          state: present
+          owner: root
+          group: root
+          mode: 0644
